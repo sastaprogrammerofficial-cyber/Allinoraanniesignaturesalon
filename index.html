@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allenora Annie | Signature Salon Multan</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        black: {
+                            DEFAULT: '#050505',
+                            100: '#111111',
+                            200: '#1a1a1a'
+                        },
+                        gold: {
+                            light: '#FBF5B7',
+                            DEFAULT: '#D4AF37',
+                            dark: '#AA771C'
+                        },
+                        blush: {
+                            light: '#ffe4e6',
+                            DEFAULT: '#fda4af',
+                            dark: '#fb7185'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C)',
+                        'gold-gradient-hover': 'linear-gradient(to right, #FCF6BA, #BF953F, #FBF5B7, #AA771C, #B38728)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Premium Effects -->
+    <style>
+        :root {
+            --glass-border: rgba(212, 175, 55, 0.3);
+            --glass-bg: rgba(20, 20, 20, 0.6);
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Lenis Smooth Scroll */
+        html.lenis {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-pink {
+            background: rgba(253, 164, 175, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(253, 164, 175, 0.2);
+        }
+
+        /* Typography Enhancements */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .text-gradient-pink {
+            background: linear-gradient(to right, #fda4af, #fb7185, #fda4af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Custom Hover Effects */
+        .magnetic-btn {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 50%;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 0;
+        }
+
+        .magnetic-btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .magnetic-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Image Reveal Mask */
+        .reveal-mask {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        /* Glowing accents */
+        .glow-gold {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glow-pink {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(253,164,175,0.1) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* High-end Loader */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #050505;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .loader-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            letter-spacing: 0.2em;
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+        }
+        .progress-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress {
+            position: absolute;
+            top: 0; left: 0; height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
+        }
+    </style>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="antialiased font-sans selection:bg-gold selection:text-black">
+
+    <!-- Preloader -->
+    <div id="loader">
+        <div class="loader-logo">ALLENORA</div>
+        <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    </div>
+
+    <!-- Background Ambient Glows -->
+    <div class="glow-gold top-[20%] left-[-10%]"></div>
+    <div class="glow-pink top-[60%] right-[-10%]"></div>
+    <div class="glow-gold bottom-[10%] left-[20%]"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-500 py-6 px-8 lg:px-16" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-4">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-2xl font-bold tracking-widest text-gradient-gold uppercase">Allenora</span>
+            </div>
+            
+            <div class="hidden md:flex gap-8 items-center font-medium text-sm tracking-widest uppercase">
+                <a href="#about" class="hover:text-gold transition-colors duration-300">The Legacy</a>
+                <a href="#services" class="hover:text-gold transition-colors duration-300">Services</a>
+                <a href="#gallery" class="hover:text-gold transition-colors duration-300">Portfolio</a>
+                <a href="#reviews" class="hover:text-gold transition-colors duration-300">Reviews</a>
+            </div>
+
+            <a href="#book" class="magnetic-btn bg-gold-gradient text-black px-6 py-2.5 rounded-full font-serif font-bold text-sm tracking-wider hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all">
+                <span>Book Now</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden" id="home">
+        <!-- Parallax Background Image (High depth of field Pinterest style) -->
+        <div class="absolute inset-0 w-full h-[120%] -top-[10%] z-0" id="hero-bg">
+            <div class="absolute inset-0 bg-black/50 z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10"></div>
+            <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=2071&auto=format&fit=crop" alt="Bridal Beauty" class="w-full h-full object-cover object-center opacity-80" />
+        </div>
+
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center mt-20">
+            <p class="hero-elem font-sans tracking-[0.3em] text-blush text-sm md:text-base uppercase mb-6 font-medium">Signature Salon Multan</p>
+            <h1 class="hero-elem font-serif text-5xl md:text-7xl lg:text-9xl leading-none mb-6 uppercase tracking-wider">
+                <span class="block text-gradient-gold pb-2">Allenora</span>
+                <span class="block text-white">Annie</span>
+            </h1>
+            <p class="hero-elem font-sans text-gray-300 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-10">
+                Where majesty meets modern artistry. Experience the pinnacle of bridal and beauty excellence in a realm designed for royalty.
+            </p>
+            <div class="hero-elem flex flex-col sm:flex-row gap-6">
+                <a href="#services" class="magnetic-btn glass px-10 py-4 rounded-full font-serif text-gold border border-gold/50 hover:bg-gold/10 transition-colors uppercase tracking-widest text-sm flex items-center gap-3">
+                    <span>Explore Services</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-50 hero-elem">
+            <span class="text-[10px] uppercase tracking-widest font-sans">Scroll to Discover</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Ratings Strip -->
+    <div class="w-full border-y border-white/5 bg-black-100 py-6 overflow-hidden relative z-20">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-center items-center gap-12 font-serif text-sm tracking-widest text-gray-400">
+            <div class="flex items-center gap-4 reveal-up">
+                <div class="text-gold flex gap-1 text-lg">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <span>4.4 Google Reviews</span>
+            </div>
+            <div class="hidden md:block w-[1px] h-8 bg-white/10 reveal-up"></div>
+            <div class="flex items-center gap-4 reveal-up">
+                <div class="text-blush flex gap-1 text-lg">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <span>5/5 Facebook Rating</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- About / The Legacy -->
+    <section id="about" class="py-32 relative z-20">
+        <div class="max-w-7xl mx-auto px-8 lg:px-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative about-img-wrapper reveal-mask">
+                    <div class="absolute -inset-4 border border-gold/30 rounded-2xl z-0 transform translate-x-4 translate-y-4"></div>
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1974&auto=format&fit=crop" alt="Salon Interior" class="relative z-10 w-full h-[600px] object-cover rounded-2xl filter brightness-90 shadow-2xl" />
+                    <div class="absolute -bottom-10 -right-10 z-20 glass p-8 rounded-2xl max-w-[250px] hidden md:block" data-speed="1.1">
+                        <p class="font-serif text-4xl text-gradient-gold mb-2">20+</p>
+                        <p class="font-sans text-xs tracking-widest uppercase text-gray-300">Years of crafting perfect brides</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col justify-center text-left">
+                    <p class="text-blush uppercase tracking-[0.3em] text-sm mb-4 font-medium reveal-text">The Legacy</p>
+                    <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight reveal-text">The Signature of <span class="text-gradient-gold italic">Royalty</span></h2>
+                    <p class="font-sans text-gray-400 font-light text-lg mb-6 leading-relaxed reveal-text">
+                        Located in the heart of Multan, Allenora Annie Signature Salon is not just a beauty parlor; it is a sanctuary where every girl is treated like a queen. Our philosophy intertwines traditional elegance with avant-garde aesthetics.
+                    </p>
+                    <p class="font-sans text-gray-400 font-light text-lg mb-10 leading-relaxed reveal-text">
+                        From majestic bridal makeovers to opulent spa treatments, our master stylists utilize only the finest international products. Step into an atmosphere of polished glass, gold accents, and serene luxury.
+                    </p>
+                    <div class="reveal-text">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Signature_of_Annie_Besant.png" alt="Signature" class="h-16 filter invert opacity-50 sepia hue-rotate-[10deg] saturate-[200%] contrast-[150%]">
+                        <p class="font-serif text-gold text-sm tracking-widest mt-2 uppercase">Master Stylist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 relative bg-black-100/50 z-20">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-8 lg:px-16 relative z-10">
+            <div class="text-center mb-20">
+                <p class="text-blush uppercase tracking-[0.3em] text-sm mb-4 font-medium reveal-up">Our Expertise</p>
+                <h2 class="font-serif text-5xl md:text-6xl reveal-up">Majestic <span class="text-gradient-gold">Services</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="glass service-card p-10 rounded-2xl group hover:border-gold transition-all duration-500 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gold/5 transform scale-y-0 origin-bottom transition-transform duration-500 group-hover:scale-y-100 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mb-8 border border-gold/20 group-hover:bg-gold transition-colors duration-500">
+                            <i class="fa-solid fa-crown text-2xl text-gold group-hover:text-black transition-colors duration-500"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl mb-4 text-white group-hover:text-gold transition-colors duration-500">Bridal Makeover</h3>
+                        <p class="font-sans text-gray-400 font-light leading-relaxed mb-8">Flawless, high-definition makeup tailored to make you the majestic centerpiece of your special day. HD and Airbrush techniques.</p>
+                        <a href="#" class="text-sm font-sans tracking-widest uppercase text-blush group-hover:text-white flex items-center gap-2">
+                            Discover <i class="fa-solid fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass service-card p-10 rounded-2xl group hover:border-blush transition-all duration-500 relative overflow-hidden mt-0 md:mt-12">
+                    <div class="absolute inset-0 bg-blush/5 transform scale-y-0 origin-bottom transition-transform duration-500 group-hover:scale-y-100 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-blush/10 flex items-center justify-center mb-8 border border-blush/20 group-hover:bg-blush transition-colors duration-500">
+                            <i class="fa-solid fa-wand-magic-sparkles text-2xl text-blush group-hover:text-black transition-colors duration-500"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl mb-4 text-white group-hover:text-blush transition-colors duration-500">Hair Styling & Care</h3>
+                        <p class="font-sans text-gray-400 font-light leading-relaxed mb-8">From elegant up-dos to deep conditioning keratin treatments. Transform your hair into a crown of glory with our experts.</p>
+                        <a href="#" class="text-sm font-sans tracking-widest uppercase text-gold group-hover:text-white flex items-center gap-2">
+                            Discover <i class="fa-solid fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass service-card p-10 rounded-2xl group hover:border-gold transition-all duration-500 relative overflow-hidden mt-0 lg:mt-24">
+                    <div class="absolute inset-0 bg-gold/5 transform scale-y-0 origin-bottom transition-transform duration-500 group-hover:scale-y-100 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mb-8 border border-gold/20 group-hover:bg-gold transition-colors duration-500">
+                            <i class="fa-solid fa-spa text-2xl text-gold group-hover:text-black transition-colors duration-500"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl mb-4 text-white group-hover:text-gold transition-colors duration-500">Signature Spa</h3>
+                        <p class="font-sans text-gray-400 font-light leading-relaxed mb-8">Indulge in deep relaxation. Premium facials, manicures, and pedicures designed to rejuvenate your skin and soul.</p>
+                        <a href="#" class="text-sm font-sans tracking-widest uppercase text-blush group-hover:text-white flex items-center gap-2">
+                            Discover <i class="fa-solid fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Width Video / Banner Break -->
+    <section class="h-[60vh] w-full relative overflow-hidden z-20 flex items-center justify-center">
+        <div class="absolute inset-0 z-0 parallax-banner">
+            <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2069&auto=format&fit=crop" alt="Luxurious Makeup" class="w-full h-[150%] object-cover object-center filter brightness-[0.3]" />
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <i class="fa-solid fa-quote-left text-4xl text-gold/50 mb-6"></i>
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-white max-w-4xl mx-auto leading-tight mb-8">
+                "Beauty is an attitude. We just provide the <span class="text-gradient-pink italic">majestic touch</span>."
+            </h2>
+            <div class="w-24 h-[1px] bg-gold mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- Gallery / Portfolio -->
+    <section id="gallery" class="py-32 relative z-20">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 px-4">
+                <div>
+                    <p class="text-gold uppercase tracking-[0.3em] text-sm mb-4 font-medium reveal-up">Portfolio</p>
+                    <h2 class="font-serif text-5xl md:text-6xl reveal-up">Aesthetic <span class="italic text-gray-400">Brilliance</span></h2>
+                </div>
+                <a href="#" class="group flex items-center gap-2 text-sm font-sans tracking-widest uppercase text-blush mt-8 md:mt-0 reveal-up">
+                    View Full Gallery <div class="w-8 h-[1px] bg-blush group-hover:w-12 transition-all"></div>
+                </a>
+            </div>
+
+            <!-- CSS Grid Masonry-like layout -->
+            <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[800px]">
+                <div class="gallery-item md:col-span-2 md:row-span-2 relative overflow-hidden rounded-xl group cursor-pointer">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?q=80&w=1936&auto=format&fit=crop" alt="Bride 1" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute bottom-8 left-8 z-20 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <p class="font-serif text-2xl text-white">Royal Barat</p>
+                        <p class="font-sans text-xs uppercase tracking-widest text-gold mt-1">HD Makeup</p>
+                    </div>
+                </div>
+                <div class="gallery-item md:col-span-1 md:row-span-1 relative overflow-hidden rounded-xl group cursor-pointer">
+                     <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1512496015851-a1c814782bb1?q=80&w=1974&auto=format&fit=crop" alt="Detail" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="gallery-item md:col-span-1 md:row-span-1 relative overflow-hidden rounded-xl group cursor-pointer">
+                     <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1521590832167-7bfcbaa6362d?q=80&w=2070&auto=format&fit=crop" alt="Hair" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="gallery-item md:col-span-2 md:row-span-1 relative overflow-hidden rounded-xl group cursor-pointer">
+                     <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1974&auto=format&fit=crop" alt="Bride 2" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute bottom-8 left-8 z-20 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <p class="font-serif text-2xl text-white">Walima Elegance</p>
+                        <p class="font-sans text-xs uppercase tracking-widest text-blush mt-1">Soft Glam</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-32 relative z-20 bg-gradient-to-b from-black to-black-200">
+        <div class="max-w-7xl mx-auto px-8 lg:px-16 text-center">
+            <h2 class="font-serif text-5xl md:text-6xl mb-16 reveal-up">Words of <span class="text-gradient-pink italic">Queens</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass-pink p-10 rounded-2xl text-left review-card">
+                    <div class="flex items-center gap-2 text-gold mb-6 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-sans text-gray-300 font-light leading-relaxed mb-8 italic">"Absolutely phenomenal experience! The staff made me feel like royalty on my wedding day. The makeup was flawless and lasted until the very end without needing a single touch-up."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-blush font-serif text-xl border border-blush/30">A</div>
+                        <div>
+                            <p class="font-serif text-white text-lg">Ayesha Khan</p>
+                            <p class="font-sans text-xs text-gray-500 tracking-widest uppercase">Google Review</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-pink p-10 rounded-2xl text-left review-card transform md:-translate-y-8">
+                    <div class="flex items-center gap-2 text-gold mb-6 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-sans text-gray-300 font-light leading-relaxed mb-8 italic">"Best salon in Multan! The ambiance is luxurious, and the glassy aesthetic is stunning. I got my party makeup done and received countless compliments."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-blush font-serif text-xl border border-blush/30">F</div>
+                        <div>
+                            <p class="font-serif text-white text-lg">Fatima Zahra</p>
+                            <p class="font-sans text-xs text-gray-500 tracking-widest uppercase">Facebook Review</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-pink p-10 rounded-2xl text-left review-card">
+                    <div class="flex items-center gap-2 text-gold mb-6 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="font-sans text-gray-300 font-light leading-relaxed mb-8 italic">"The signature spa services are out of this world. Highly recommend Annie and her professional team. True definition of a premium beauty parlor."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-blush font-serif text-xl border border-blush/30">S</div>
+                        <div>
+                            <p class="font-serif text-white text-lg">Sara Ahmed</p>
+                            <p class="font-sans text-xs text-gray-500 tracking-widest uppercase">Google Review</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 flex justify-center items-center gap-4 font-sans text-sm text-gray-400 reveal-up">
+                <span>Overall Rating:</span>
+                <span class="font-serif text-2xl text-gold">4.8</span>
+                <div class="flex text-gold text-xs">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <span>(489 Reviews)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Booking CTA -->
+    <footer id="book" class="relative z-20 bg-black-200 border-t border-white/5 pt-32 pb-10 overflow-hidden">
+        <div class="absolute right-0 bottom-0 w-1/2 h-full bg-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-8 lg:px-16 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+                <div>
+                    <h2 class="font-serif text-5xl md:text-7xl mb-6 leading-none">Reserve Your <br><span class="text-gradient-gold">Crown</span></h2>
+                    <p class="font-sans text-gray-400 font-light text-lg mb-10 max-w-md">Book your appointment at Multan's most prestigious signature salon. Experience beauty redefined.</p>
+                    
+                    <form class="space-y-6 max-w-md">
+                        <div class="relative">
+                            <input type="text" placeholder="Your Name" class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-gold transition-colors font-sans placeholder-gray-600">
+                        </div>
+                        <div class="relative">
+                            <input type="tel" placeholder="Phone Number" class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-gold transition-colors font-sans placeholder-gray-600">
+                        </div>
+                        <div class="relative">
+                            <select class="w-full bg-transparent border-b border-gray-700 py-3 text-gray-400 focus:outline-none focus:border-gold transition-colors font-sans appearance-none">
+                                <option value="" disabled selected>Select Service</option>
+                                <option value="bridal" class="bg-black">Bridal Makeover</option>
+                                <option value="party" class="bg-black">Party Makeup</option>
+                                <option value="hair" class="bg-black">Hair Styling</option>
+                                <option value="spa" class="bg-black">Spa & Skin Care</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-4 text-gray-600 pointer-events-none"></i>
+                        </div>
+                        <button type="button" class="w-full magnetic-btn bg-gold-gradient text-black py-4 mt-8 font-serif font-bold text-sm tracking-widest uppercase hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all">
+                            <span>Request Appointment</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="flex flex-col justify-end lg:pl-20 border-l-0 lg:border-l border-white/10">
+                    <div class="mb-12">
+                        <h3 class="font-serif text-2xl text-white mb-4">Location</h3>
+                        <p class="font-sans text-gray-400 font-light leading-relaxed">Allenora Annie Signature Salon<br>Gulgasht Colony, Multan<br>Punjab, Pakistan</p>
+                    </div>
+                    <div class="mb-12">
+                        <h3 class="font-serif text-2xl text-white mb-4">Contact</h3>
+                        <p class="font-sans text-gray-400 font-light leading-relaxed">Appointments: +92 300 0000000<br>Info: hello@allenoramultan.com</p>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-2xl text-white mb-6">Follow Our Majesty</h3>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center text-white hover:border-gold hover:text-gold transition-all"><i class="fa-brands fa-instagram text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center text-white hover:border-blush hover:text-blush transition-all"><i class="fa-brands fa-facebook-f text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center text-white hover:border-gold hover:text-gold transition-all"><i class="fa-brands fa-pinterest-p text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <span class="font-serif text-xl tracking-widest text-gradient-gold uppercase">Allenora Annie</span>
+                <p class="font-sans text-xs text-gray-600 tracking-widest uppercase">© 2026 All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    
+    <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Preloader Logic
+        const initPreloader = () => {
+            const tl = gsap.timeline();
+            
+            tl.to("#progress", {
+                width: "100%",
+                duration: 1.5,
+                ease: "power2.inOut"
+            })
+            .to(".loader-logo", {
+                opacity: 1,
+                y: -10,
+                duration: 0.5,
+                ease: "power2.out"
+            }, "-=0.5")
+            .to("#loader", {
+                yPercent: -100,
+                duration: 1,
+                ease: "power4.inOut",
+                delay: 0.5,
+                onComplete: initAnimations // Start main animations after loader
+            });
+        };
+
+        // Smooth Scroll (Lenis)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        // Sync GSAP and Lenis
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // Animations Setup
+        const initAnimations = () => {
+            // Hero Intro Animation
+            gsap.fromTo(".hero-elem", 
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" }
+            );
+
+            // Parallax Hero Background
+            gsap.to("#hero-bg", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#home",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Navbar Glass effect on scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if(window.scrollY > 50) {
+                    nav.classList.add('py-4');
+                    nav.classList.remove('py-6');
+                } else {
+                    nav.classList.add('py-6');
+                    nav.classList.remove('py-4');
+                }
+            });
+
+            // Reveal Up Elements
+            gsap.utils.toArray('.reveal-up').forEach(elem => {
+                gsap.fromTo(elem,
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: "top 85%",
+                        }
+                    }
+                );
+            });
+
+            // Text Reveal (Line by Line)
+            gsap.utils.toArray('.reveal-text').forEach(elem => {
+                gsap.fromTo(elem,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 1, stagger: 0.2,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: "top 85%",
+                        }
+                    }
+                );
+            });
+
+            // Image Mask Reveal
+            gsap.fromTo(".reveal-mask",
+                { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+                {
+                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                    scrollTrigger: {
+                        trigger: ".about-img-wrapper",
+                        start: "top 75%",
+                    }
+                }
+            );
+
+            // Parallax on About floating card
+            gsap.to("[data-speed]", {
+                y: (i, el) => (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0
+                }
+            });
+
+            // Service Cards Stagger
+            gsap.fromTo(".service-card",
+                { y: 100, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: "#services",
+                        start: "top 70%",
+                    }
+                }
+            );
+
+            // Banner Image Parallax
+            gsap.to(".parallax-banner img", {
+                yPercent: -20,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".parallax-banner",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Gallery Reveal
+            gsap.fromTo(".gallery-item",
+                { scale: 0.9, opacity: 0 },
+                {
+                    scale: 1, opacity: 1, duration: 1, stagger: 0.1, ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#gallery",
+                        start: "top 75%",
+                    }
+                }
+            );
+
+            // Reviews Stagger
+            gsap.fromTo(".review-card",
+                { y: 50, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#reviews",
+                        start: "top 75%",
+                    }
+                }
+            );
+        };
+
+        // Initialize Everything
+        window.onload = () => {
+            initPreloader();
+        };
+
+    </script>
+</body>
+</html>
